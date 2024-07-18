@@ -16,3 +16,17 @@ jobs:
       uses: docker/setup-buildx-action@v2
     - name: Build the Docker image
       run: docker build front-end-nextjs --file front-end-nextjs/Dockerfile --tag qr-code-app:$(date +%s)
+    - name: Push the Docker image
+      run: docker push qr-code-app:$(date +%s)
+
+  build_another_image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build the second Docker image
+      run: docker build api --file api/Dockerfile --tag qr-code-app-api:$(date +%s)
+    - name: Push the second Docker image
+      run: docker push qr-code-app-api:$(date +%s)
