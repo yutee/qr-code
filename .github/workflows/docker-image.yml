@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     - name: Build the Docker image
-      run: docker build front-end-nextjs --file front-end-nextjs/Dockerfile --tag qr-code-app:$(date +%s)
+      run: docker build front-end-nextjs --file front-end-nextjs/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/qr-code-app:latest
     - name: Push the Docker image
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/qr-code-app:latest
 
@@ -37,6 +37,6 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     - name: Build the second Docker image
-      run: docker build api --file api/Dockerfile --tag qr-code-app-api:$(date +%s)
+      run: docker build api --file api/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/qr-code-app-api:latest
     - name: Push the second Docker image
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/qr-code-app-api:latest
